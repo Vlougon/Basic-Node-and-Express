@@ -8,11 +8,13 @@ let object = { "message": "Hello json" };
 
 console.log("Hello World");
 
+// MIDDLEWARE
 app.use("/public", express.static(publicPath));
 app.use(function (req, res, next) {
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 });
+app.use(express.urlencoded());
 
 app.get("/", function (req, res) {
     res.sendFile(indexPath);
@@ -37,23 +39,21 @@ app.get("/now", function (req, res, next) {
 
 app.get("/:word/echo", function (req, res) {
     const word = req.params.word;
-    res.json({echo: word});
+    res.json({ echo: word });
 });
 
+app.route("/name").get(function (req, res) {
+    const firstName = req.query.first;
+    const lastName = req.query.last;
 
+    res.json({ name: firstName + " " + lastName });
 
+}).post(function (req, res) {
+    const firstName = req.body.first;
+    const lastName = req.body.last;
 
-
-
-
-
-
-
-
-
-
-
-
+    res.json({ name: firstName + " " + lastName });
+});
 
 
 
