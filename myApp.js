@@ -9,7 +9,7 @@ let object = { "message": "Hello json" };
 console.log("Hello World");
 
 app.use("/public", express.static(publicPath));
-app.use("/", function (req, res, next) {
+app.use(function (req, res, next) {
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 });
