@@ -1,3 +1,5 @@
+require('dotenv').config() 
+
 let express = require('express');
 let app = express();
 let indexPath = __dirname + "/views/index.html";
@@ -13,6 +15,10 @@ app.get("/", function (req, res) {
 });
 
 app.get("/json", function (req, res) {
+    if (process.env.MESSAGE_STYLE === "uppercase") {
+        object.message = object.message.toUpperCase();
+    }
+
     res.json(object);
 });
 
