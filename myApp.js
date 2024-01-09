@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+const bodyParser = require('body-parser');
 
 let express = require('express');
 let app = express();
@@ -14,7 +15,7 @@ app.use(function (req, res, next) {
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 });
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", function (req, res) {
     res.sendFile(indexPath);
